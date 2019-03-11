@@ -6,21 +6,153 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical">
-    
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
+        android:background="#13579B"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:src="@drawable/image11"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="50dp"
+                    android:text="군도"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_15" />
+
+                <TextView
+                    android:textColor="#FFFFFF"
+                    android:text="2014.07.22 개봉 \n액션 / 137분"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:src="@drawable/ic_thumb_up"
+                    android:layout_marginTop="140dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginTop="140dp"
+                    android:layout_marginLeft="40dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15"/>
+
+                <ImageView
+                    android:src="@drawable/ic_thumb_down"
+                    android:layout_marginTop="140dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginTop="140dp"
+                    android:layout_marginLeft="100dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"/>
+
+            </RelativeLayout>
 
 
         </LinearLayout>
 
 
     </LinearLayout>
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
 
+        <TextView
+            android:gravity="center"
+            android:text="예 매 율 \n5회 1.0%"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:gravity="center"
+                android:text="평 점"
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+            <RatingBar
+                android:gravity="center"
+                style="?android:attr/ratingBarStyleSmall"
+                android:numStars="5"
+                android:max="10"
+                android:stepSize="0.5"
+                android:rating="8.2"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:gravity="center"
+            android:text="누적관객 수\n811,175 명"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="500dp"
+        android:layout_width="match_parent">
+
+    </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
