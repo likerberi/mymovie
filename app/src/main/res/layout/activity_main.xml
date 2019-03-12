@@ -7,12 +7,8 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
     <LinearLayout
-        android:background="#13579B"
+        android:background="#9B1357"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="200dp">
@@ -38,7 +34,7 @@
                     android:textColor="#FFFFFF"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="50dp"
-                    android:text="군도"
+                    android:text="Name of movie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -51,7 +47,7 @@
 
                 <TextView
                     android:textColor="#FFFFFF"
-                    android:text="2014.07.22 개봉 \n액션 / 137분"
+                    android:text="Date and Infos"
                     android:layout_marginTop="80dp"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
@@ -102,7 +98,7 @@
 
         <TextView
             android:gravity="center"
-            android:text="예 매 율 \n5회 1.0%"
+            android:text="Infomation A"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
@@ -115,11 +111,12 @@
 
             <TextView
                 android:gravity="center"
-                android:text="평 점"
+                android:text="Rating A"
                 android:layout_weight="2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
 
+            <!-- small JUST information for rating bar -->
             <RatingBar
                 android:gravity="center"
                 style="?android:attr/ratingBarStyleSmall"
@@ -140,7 +137,7 @@
 
         <TextView
             android:gravity="center"
-            android:text="누적관객 수\n811,175 명"
+            android:text="Information B"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
@@ -152,7 +149,5 @@
         android:layout_width="match_parent">
 
     </LinearLayout>
-
-    </ScrollView>
 
 </LinearLayout>
