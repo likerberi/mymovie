@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+//import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'buttons.dart';
 import 'package:get/get.dart';
 
-final helloWorldProvider = Provider((_) => 'Hello World');
-
 void main() {
-  runApp(
-      ProviderScope(child: CalcApp()));
+  runApp(GetMaterialApp(home: CalcApp()));
 }
 
-class CalcApp extends ConsumerWidget {
+class CalcApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final String value = ref.watch(helloWorldProvider);
-
+  Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Calc(),
