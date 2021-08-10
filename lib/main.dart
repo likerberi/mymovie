@@ -4,53 +4,119 @@ import 'package:math_expressions/math_expressions.dart';
 import 'buttons.dart';
 import 'package:get/get.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(GetMaterialApp(home: CalcApp()));
 }
 
 class CalcApp extends StatelessWidget {
+  final TextStyle unselectedLabelStyle = TextStyle(
+      color: Colors.white.withOpacity(0.5),
+      fontWeight: FontWeight.w500,
+      fontSize: 12);
+
+  final TextStyle selectedLabelStyle =
+  TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 12);
+
+  var userInput = '';
+  var answer = '';
+
+  final List<String> buttons = [
+    'C', '.', '%', 'DEL',
+    '7', '8', '9', '/',
+    '4', '5', '6', 'x',
+    '1', '2', '3', '-',
+    '00', '0', '=', '+',
+  ];
+
+  buildBottomNavigationMenu(context, landingPageController) {
+    return Obx(() => SizedBox(
+          height: 54,
+          child: BottomNavigationBar(
+            showUnselectedLabels: true,
+            showSelectedLabels: true,
+            onTap: landingPageController.changeTabIndex,
+            currentIndex: landingPageController.tabIndex.value,
+            backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+            unselectedItemColor: Colors.white.withOpacity(0.5),
+            selectedItemColor: Colors.white,
+            unselectedLabelStyle: unselectedLabelStyle,
+            selectedLabelStyle: selectedLabelStyle,
+            items: [
+              BottomNavigationBarItem(
+                icon: Container(
+                  margin: EdgeInsets.only(bottom: 7),
+                  child: Icon(
+                    Icons.home,
+                    size: 20.0,
+                  ),
+                ),
+                label: 'Home',
+                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+              ),
+              BottomNavigationBarItem(
+                icon: Container(
+                  margin: EdgeInsets.only(bottom: 7),
+                  child: Icon(
+                    Icons.search,
+                    size: 20.0,
+                  ),
+                ),
+                label: 'Explore',
+                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+              ),
+              BottomNavigationBarItem(
+                icon: Container(
+                  margin: EdgeInsets.only(bottom: 7),
+                  child: Icon(
+                    Icons.location_history,
+                    size: 20.0,
+                  ),
+                ),
+                label: 'Places',
+                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+              ),
+            ],
+          ),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    final DashboardController landingPageController = Get.put(DashboardController(), permanent: false);
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Calc(),
-    );
+      home: SafeArea(
+        child: Scaffold(
+          bottomNavigationBar:
+          buildBottomNavigationMenu(context, landingPageController),
+          body: Obx(() => IndexedStack(
+            index: landingPageController.tabIndex.value,
+            children: [
+              Calculation(),
+              Calculation(),
+              Calculation(),
+            ],
+          )),
+        )));
   }
 }
 
-class Calc extends StatefulWidget {
+class Calculation extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return _CalcState();
-  }
+  State<StatefulWidget> createState() => _Calculation();
 }
 
-class _CalcState extends State<Calc> {
+class _Calculation extends State<Calculation> {
   var userInput = '';
   var answer = '';
 
   // Array of button
   final List<String> buttons = [
-    'C',
-    '.',
-    '%',
-    'DEL',
-    '7',
-    '8',
-    '9',
-    '/',
-    '4',
-    '5',
-    '6',
-    'x',
-    '1',
-    '2',
-    '3',
-    '-',
-    '00',
-    '0',
-    '=',
-    '+',
+    'C', '.', '%', 'DEL',
+    '7', '8', '9', '/',
+    '4', '5', '6', 'x',
+    '1', '2', '3', '-',
+    '00', '0', '=', '+',
   ];
 
   @override
@@ -59,22 +125,6 @@ class _CalcState extends State<Calc> {
       appBar: new AppBar(
         title: new Text("Calculator"),
       ), //AppBar
-      bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calculate),
-              label: '숫자 계산',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.domain),
-              label: '세금 계산',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.emoji_symbols),
-              label: '% 계산',
-            ),
-          ]
-      ),
       backgroundColor: Colors.white38,
       body: Column(
         children: <Widget>[
@@ -84,15 +134,15 @@ class _CalcState extends State<Calc> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(20),
                       alignment: Alignment.centerRight,
                       child: Text(
                         userInput,
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                        style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(15),
                       alignment: Alignment.centerRight,
                       child: Text(
                         answer,
@@ -106,9 +156,9 @@ class _CalcState extends State<Calc> {
             ),
           ),
           Expanded(
-            flex: 5,
+            flex: 7,
+
             child: Container(
-              padding: EdgeInsets.all(30),
               child: GridView.builder(
                   itemCount: buttons.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -220,5 +270,25 @@ class _CalcState extends State<Calc> {
     ContextModel cm = ContextModel();
     double eval = exp.evaluate(EvaluationType.REAL, cm);
     answer = eval.toString();
+  }
+}
+
+class DashboardController extends GetxController {
+  var tabIndex = 0.obs; // .value ~ approach
+
+  void changeTabIndex(int index) {
+    tabIndex.value = index;
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }
