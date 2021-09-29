@@ -1,0 +1,14 @@
+프로바이더에 연결되는 다른 것들을 이어서 알아봅니다.
+
+.stream
+Stream을 읽습니다
+
+.last
+Future값을 읽습니다.
+
+.select / .listen
+특정 상황을 한정할 때에 사용합니다.
+
+.refresh
+수신 중이거나 수신된 프로바이더 값을 강제로 새로고침 합니다.
+(watch는 자동, refreshsms 강제 새로고침입니다)
